@@ -1,12 +1,33 @@
-﻿@using Google.Apis.Storage.v1.Data
-@model IList<Bucket>
+﻿@model IEnumerable<DemoApp.Posts.PostReference>
 
-<h1>List of buckets:</h1>
+@{
+    ViewBag.Title = "Posts";
+}
 
-<ul>
-    @foreach(var bucket in Model)
-    {
-        <li><a href="/home/bucket?name=@bucket.Name">@bucket.Name</a></li>
-    }
-</ul>
+<h2>Ivan's Musings</h2>
 
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditPost", new { id=item.Id }) |
+            @Html.ActionLink("Show", "ShowPost", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
